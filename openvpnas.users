@@ -1,0 +1,24 @@
+{
+  "__DEFAULT__": {
+    "def_deny": "true",
+    "prop_autogenerate": "true",
+    "prop_force_lzo": "false",
+    "type": "user_default"
+  },
+  "bcurnow": {
+    "prop_google_auth": "true",
+    "prop_superuser": "true",
+    "pvt_google_auth_secret": "IPEX4GGWL246GKFD",
+    "pvt_google_auth_secret_locked": "true",
+    "pvt_password_digest": "$P$7bPMuFYQxtRzF8japmkayQ==$1Q173EmMh8pmWN3spbe7X9fZHcLtt7ytYQFz6KlDadQ=",
+    "type": "user_compile"
+  },
+  "openvpn": {
+    "prop_deny": "true",
+    "prop_superuser": "true",
+    "pvt_google_auth_secret": "KT2AVZUY4ANCQ7OS",
+    "pvt_google_auth_secret_locked": "false",
+    "pvt_password_digest": "$P$4eOsiUInBT6nJdPnvpYpmA==$ekEKZz4/uzZJQ3d6wI49tfkoNjrlCCK7fn9chUUUpA0=",
+    "type": "user_compile"
+  }
+}
