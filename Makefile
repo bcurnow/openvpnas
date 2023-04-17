@@ -3,7 +3,7 @@
 SHELL := /bin/bash
 currentDir := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 imageName := $(notdir $(patsubst %/,%,$(dir $(currentDir))))
-dockerRegistry := devpi.local:443
+dockerRegistry := registry.internal.curnowtopia.com
 dockerOpts := --rm --network proxy --cap-add=NET_ADMIN -v ovpn-data-vpn.geekfundamentals.com:/usr/local/openvpn_as --device=/dev/net/tun ${imageName}:latest
 
 docker-build:
