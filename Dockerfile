@@ -15,7 +15,8 @@ RUN echo "*** Install dependencies ***" && \
      curl --silent -o /etc/apt/trusted.gpg.d/as-repository.asc https://as-repository.openvpn.net/as-repo-public.asc && \
      echo "\n*** Install OpenVPN AS repository ***\n" && \
      echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/as-repository.asc] http://as-repository.openvpn.net/as/debian ${DEBIAN_RELEASE} main">/etc/apt/sources.list.d/openvpn-as-repo.list && \
-     echo "\n*** Ignore log messages regarding failed configuration and missing systemctl, we don't use systemd inside the container\n" && \
+     echo "\n*** Installing OpenVPN AS version (${OPENVPNAS_VERSION})" \
+     echo "*** Ignore log messages regarding failed configuration and missing systemctl, we don't use systemd inside the container\n" && \
      apt-get update && apt-get -y install --no-install-recommends openvpn-as=${OPENVPNAS_VERSION} python3-service-identity && \
      echo "\n*** Cleaning up files ***\n" && \
      rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*  /var/lib/apt/lists/*
