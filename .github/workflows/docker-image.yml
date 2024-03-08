@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
 env:
-  OPENVPNAS_VERSION: 2.13.1
+  OPENVPNAS_VERSION: 2.13.1-d8cdeb9c-Debian12
   
 jobs:
 
