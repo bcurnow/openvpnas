@@ -7,7 +7,7 @@ LABEL org.opencontainers.image.licenses=GPL-3.0-or-later
 ARG DEBIAN_RELEASE="bookworm"
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ARG OPENVPNAS_VERSION
+ARG OPENVPNAS_VERSION="2.13.1-d8cdeb9c-Debian12"
 
 RUN echo "*** Install dependencies ***" && \
     apt-get update && apt-get -y install --no-install-recommends \
