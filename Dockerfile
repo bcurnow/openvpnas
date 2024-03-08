@@ -1,5 +1,9 @@
 from debian:12
 
+LABEL org.opencontainers.image.source=https://github.com/bcurnow/openvpnas
+LABEL org.opencontainers.image.description="OpenVPN Access Server"
+LABEL org.opencontainers.image.licenses=GPL-3.0-or-later
+
 ARG DEBIAN_RELEASE="bookworm"
 ARG DEBIAN_FRONTEND="noninteractive"
 
