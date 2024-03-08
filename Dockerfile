@@ -24,11 +24,11 @@ RUN echo "*** Install dependencies ***" && \
      OPENVPNAS_VERSION_MSG="OpenVPN AS version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" && \
      if [ -z ${OPENVPNAS_VERSION} ]; \
      then \
-         OPENVPNAS_VERSION=${OPENVPNAS_LATEST_VERSION} \
-         OPENVPNAS_SHORT_VERSION=${OPENVPNAS_LATEST_SHORT_VERSION} \
-         echo "\n*** Installing OpenVN AS latest version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" \
+         OPENVPNAS_VERSION=${OPENVPNAS_LATEST_VERSION}; \
+         OPENVPNAS_SHORT_VERSION=${OPENVPNAS_LATEST_SHORT_VERSION}; \
+         echo "\n*** Installing OpenVN AS latest version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})"; \
      else \
-         echo "\n*** Installing OpenVN AS version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" \
+         echo "\n*** Installing OpenVN AS version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})"; \
      fi && \
      echo "\n*** Ignore log messages regarding failed configuration and missing systemctl, we don't use systemd inside the container\n" && \
      apt-get update && apt-get -y install --no-install-recommends openvpn-as=${OPENVPNAS_VERSION} python3-service-identity && \
