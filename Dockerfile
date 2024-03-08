@@ -3,7 +3,7 @@ from debian:12
 ARG DEBIAN_RELEASE="bookworm"
 ARG DEBIAN_FRONTEND="noninteractive"
 
-ARG OPENVPNAS_VERSION="2.13.1-d8cdeb9c-Debian12"
+ARG OPENVPNAS_VERSION
 
 RUN echo "*** Install dependencies ***" && \
     apt-get update && apt-get -y install --no-install-recommends \
@@ -16,10 +16,21 @@ RUN echo "*** Install dependencies ***" && \
      echo "\n*** Install OpenVPN AS repository ***\n" && \
      echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/as-repository.asc] http://as-repository.openvpn.net/as/debian ${DEBIAN_RELEASE} main">/etc/apt/sources.list.d/openvpn-as-repo.list && \
      echo "\n*** Determining latest OpenVPN AS version ***\n" && \
-     OPENVPNAS_VERSION=$(curl -sX GET http://as-repository.openvpn.net/as/debian/dists/${DEBIAN_RELEASE}/main/binary-amd64/Packages.gz | gunzip -c \
+     OPENVPNAS_LATEST_VERSION=$(curl -sX GET http://as-repository.openvpn.net/as/debian/dists/${DEBIAN_RELEASE}/main/binary-amd64/Packages.gz | gunzip -c \
        |grep -A 7 -m 1 "Package: openvpn-as" | awk -F ": " '/Version/{print $2;exit}') && \
-     echo "\n*** Latest OpenVPN AS Version: ${OPENVPNAS_VERSION} ***\n" && \
-     echo "\nInstalling OpenVPN AS version ${OPENVPNAS_VERSION}, ignore log messages regarding failed configuration and missing systemctl, we don't use systemd inside the container\n" && \
+     OPENVPNAS_LATEST_SHORT_VERSION=$(echo "${OPENVPNAS_LATEST_VERSION}" | cut -f 1 -d "-") && \
+     echo "\n*** Latest OpenVPN AS Version: ${OPENVPNAS_LATEST_SHORT_VERSION} (${OPENVPNAS_LATEST_VERSION}) ***\n" && \
+     OPENVPNAS_SHORT_VERSION=$(echo "${OPENVPNAS_LATEST_VERSION}" | cut -f 1 -d "-") && \
+     OPENVPNAS_VERSION_MSG="OpenVPN AS version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" && \
+     if [ -z ${OPENVPNAS_VERSION} ] \
+     then \
+         OPENVPNAS_VERSION=${OPENVPNAS_LATEST_VERSION} \
+         OPENVPNAS_SHORT_VERSION=${OPENVPNAS_LATEST_SHORT_VERSION} \
+         echo "\n*** Installing OpenVN AS latest version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" \
+     else \
+         echo "\n*** Installing OpenVN AS version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" \
+     fi && \
+     echo "\n*** Ignore log messages regarding failed configuration and missing systemctl, we don't use systemd inside the container\n" && \
      apt-get update && apt-get -y install --no-install-recommends openvpn-as=${OPENVPNAS_VERSION} python3-service-identity && \
      echo "\n*** Cleaning up files ***\n" && \
      rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*  /var/lib/apt/lists/*
