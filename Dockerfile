@@ -22,7 +22,7 @@ RUN echo "*** Install dependencies ***" && \
      echo "\n*** Latest OpenVPN AS Version: ${OPENVPNAS_LATEST_SHORT_VERSION} (${OPENVPNAS_LATEST_VERSION}) ***\n" && \
      OPENVPNAS_SHORT_VERSION=$(echo "${OPENVPNAS_LATEST_VERSION}" | cut -f 1 -d "-") && \
      OPENVPNAS_VERSION_MSG="OpenVPN AS version ${OPENVPNAS_SHORT_VERSION} (${OPENVPNAS_VERSION})" && \
-     if [ -z ${OPENVPNAS_VERSION} ] \
+     if [ -z ${OPENVPNAS_VERSION} ]; \
      then \
          OPENVPNAS_VERSION=${OPENVPNAS_LATEST_VERSION} \
          OPENVPNAS_SHORT_VERSION=${OPENVPNAS_LATEST_SHORT_VERSION} \
